@@ -1,0 +1,30 @@
+main {
+	font-family: sans-serif;
+	color: #dedeff;
+	background: radial-gradient(#696973, #131313);
+}
+
+#novos-header {
+	font-size: 5em;
+}
+
+#loading-text {
+	font-size: 2em;
+}
+
+#login-button {
+	padding: 1em 2em;
+	border: 4px solid;
+	border-radius: 2px;
+	background: transparent;
+	color: white;
+	font-size: 2em;
+	text-align: center;
+	transition: 0.4s;
+	cursor: pointer;
+
+	&:hover {
+		padding: 1em 2.4em;
+		opacity: 0.8;
+	}
+}

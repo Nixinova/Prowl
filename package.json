@@ -6,11 +6,13 @@
 	"repository": "https://github.com/Nixinova/Prowl",
 	"main": "src/init.js",
 	"scripts": {
-		"build": "cd dist && electron-packager ../",
-		"start": "electron ."
+		"compile": "novasheets -c **/*.nvss",
+		"build": "npm run compile && cd dist && electron-packager ../",
+		"start": "npm run compile && electron ."
 	},
 	"devDependencies": {
 		"electron": "^13.1.6",
-		"electron-packager": "^15.2.0"
+		"electron-packager": "^15.2.0",
+		"novasheets": "^1.0.2"
 	}
 }
