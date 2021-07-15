@@ -3,14 +3,19 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+	<meta http-equiv="Content-Security-Policy" content="
+		default-src 'self';
+		script-src 'self';
+		style-src 'self' 'unsafe-inline';
+	">
 	<title>Prowl</title>
 	<link rel="stylesheet" href="index.css">
 	<link rel="stylesheet" id="page-css">
+	<style id="dump-css"></style>
 </head>
 
 <body>
-	<main id="dump-html">
+	<main id="dump-html" class="window">
 		<h1>Loading...</h1>
 	</main>
 	<script src="index.js"></script>

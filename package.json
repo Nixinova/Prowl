@@ -14,5 +14,8 @@
 		"electron": "^13.1.6",
 		"electron-packager": "^15.2.0",
 		"novasheets": "^1.0.2"
+	},
+	"dependencies": {
+		"draggable": "^4.2.0"
 	}
 }

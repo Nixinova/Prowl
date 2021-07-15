@@ -1,20 +1,27 @@
 @var full size = height: 100vh; width: 100vw;
 
+* {
+	box-sizing: border-box;
+}
+
 body {
 	margin: 0;
 	background: white;
 	font-family: sans-serif;
 }
 
-main {
+.window {
 	$(full size);
 }
 
 .centered {
-	$(full size);
 	display: grid;
 	place-content: center;
 	place-items: center;
+}
+
+.draggable>.topbar {
+	cursor: pointer;
 }
 
 .hide {display: none;}

@@ -1,0 +1,68 @@
+@var tile width = 100px
+
+body {
+	overflow: hidden;
+}
+
+#desktop {
+	height: 90vh;
+	display: grid;
+	grid-template-columns: repeat(8, $(tile width));
+	grid-template-rows: repeat(5, $(tile width));
+
+	.desktop-icon {
+		background: gray;
+		&:nth-child(1) {grid-row: 2; grid-column: 2;}
+		&:nth-child(2) {grid-row: 3; grid-column: 3;}
+		&:nth-child(3) {grid-row: 4; grid-column: 4;}
+		&:nth-child(4) {grid-row: 5; grid-column: 2;}
+	}
+}
+
+#taskbar {
+	height: 10vh;
+	display: flex;
+
+	#start {
+		width: fit-content;
+		height: 10vh;
+		padding: 0.7em;
+		background: gray;
+		font-size: 2em;
+		font-weight: bold;
+	}
+
+	&-icons {
+		display: flex;
+
+		.taskbar-icon {
+			height: 10vh;
+			padding: 2em 1em;
+			background: gray;
+		}
+	}
+}
+
+#programs {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.program {
+	width: 800px;
+	height: 500px;
+	background: #444;
+	border: 2px solid gray;
+
+	&-topbar {
+		display: flex;
+		background: gray;
+
+		.program-close {
+			margin-left: auto;
+			padding-right: 4px;
+			font-weight: bold;
+		}
+	}
+}
