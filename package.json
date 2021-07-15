@@ -1,0 +1,16 @@
+{
+	"name": "prowl",
+	"private": true,
+	"version": "0.0.0-dev",
+	"description": "Internet investigation simulator",
+	"repository": "https://github.com/Nixinova/Prowl",
+	"main": "src/init.js",
+	"scripts": {
+		"build": "cd dist && electron-packager ../",
+		"start": "electron ."
+	},
+	"devDependencies": {
+		"electron": "^13.1.6",
+		"electron-packager": "^15.2.0"
+	}
+}
