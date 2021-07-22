@@ -3,11 +3,16 @@
 window.addEventListener('DOMContentLoaded', () => {
 	window.$ = (sel) => document.querySelector(sel);
 	window.removeElem = (sel) => $(sel)?.parentElement.removeChild($(sel));
-	window.createElem = (name, { id, classes, data }) => {
+	window.createElem = (name, attributes, ...content) => {
 		const elem = document.createElement(name);
-		if (id) elem.id = id;
-		if (classes) elem.setAttribute('class', classes);
-		if (data) Object.assign(elem.dataset, data);
+		for (const [key, val] of Object.entries(attributes)) {
+			elem.setAttribute(key, val);
+		}
+		elem.innerHTML='';
+		for (const item of content) {
+			if (typeof item ==='string') elem.innerHTML += item;
+			else elem.innerHTML += item.outerHTML;
+		}
 		return elem;
 	};
 	window.root = __dirname.replace(/\\/g, '/');

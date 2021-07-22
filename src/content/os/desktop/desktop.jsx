@@ -1,3 +1,4 @@
+// @jsx window.createElem
 const Draggable = require('draggable');
 
 const programsList = ['tiles', 'hakr', 'reader', 'steel'];
@@ -10,13 +11,14 @@ function loadProgram(name) {
 		loadPage(`os/programs/${name}`, '#programs');
 		const programElem = $(`#program-${name}`);
 		programElem.classList.add('draggable');
-		const programTopbar = window.createElem('div', { classes: 'program-topbar' });
-		programTopbar.innerHTML = `
+		const programTopbar = (
 			<div class="program-topbar">
-				<div class="program-title">${name[0].toUpperCase() + name.slice(1)}</div>
-				<div class="program-close" data-name="${name}">&times;</div>
+				<div class="program-topbar">
+					<div class="program-title">{name[0].toUpperCase() + name.slice(1)}</div>
+					<div class="program-close" data-name={name}>&times;</div>
+				</div>
 			</div>
-		`;
+		)
 		programElem.prepend(programTopbar);
 
 		const dragOpts = {
@@ -42,13 +44,14 @@ function closeProgram(name) {
 	console.info(`> Closing os/desktop/${name}`);
 	removeElem(`#program-${name}`);
 	hasLoaded[name] = false;
-	updateTaskbar();
 }
 
 (function init() {
 	$('#desktop').style.backgroundImage = `url('${window.root}/static/desktop-background.png')`;
 
 	programsList.forEach((name) => {
-		['desktop', 'taskbar'].forEach((part) => $(`#${part}-icon-${name}`).addEventListener('click', () => loadProgram(name)))
+		['desktop', 'taskbar'].forEach((part) => {
+			$(`#${part}-icon-${name}`).addEventListener('click', () => loadProgram(name))
+		})
 	});
 })();

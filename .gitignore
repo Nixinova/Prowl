@@ -1,3 +1,9 @@
+# Dependencies
 node_modules/
+
+# Program
 dist/
-*.css
+
+# Compiled output
+src/content/**/*.js
+src/content/**/*.css
