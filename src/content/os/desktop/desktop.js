@@ -1,24 +1,8 @@
 const Draggable = require('draggable');
 
-$('#desktop').style.backgroundImage = `url('${window.root}/static/desktop-background.png')`;
-
 const programsList = ['tiles', 'hakr', 'reader', 'steel'];
-
 const hasLoaded = {};
 programsList.forEach((name) => { hasLoaded[name] = false; });
-
-function updateTaskbar() {
-	const taskbarIcons = $('#taskbar-icons');
-	taskbarIcons.innerHTML = '';
-	Object.entries(hasLoaded).forEach(([name, hasLoaded]) => {
-		if (hasLoaded) taskbarIcons.innerHTML += `
-			<div class="taskbar-icon" id="taskbar-${name}">${name[0].toUpperCase() + name.slice(1)}</div>
-		`;
-	});
-	document.querySelectorAll('.program-topbar .program-close').forEach(elem => {
-		elem.addEventListener('click', () => closeProgram(elem.dataset.name));
-	});
-}
 
 function loadProgram(name) {
 	if (!hasLoaded[name]) {
@@ -26,12 +10,14 @@ function loadProgram(name) {
 		loadPage(`os/programs/${name}`, '#programs');
 		const programElem = $(`#program-${name}`);
 		programElem.classList.add('draggable');
-		programElem.innerHTML = `
+		const programTopbar = window.createElem('div', { classes: 'program-topbar' });
+		programTopbar.innerHTML = `
 			<div class="program-topbar">
 				<div class="program-title">${name[0].toUpperCase() + name.slice(1)}</div>
 				<div class="program-close" data-name="${name}">&times;</div>
 			</div>
-		`+ programElem.innerHTML;
+		`;
+		programElem.prepend(programTopbar);
 
 		const dragOpts = {
 			limit: {
@@ -40,24 +26,29 @@ function loadProgram(name) {
 			},
 		};
 		new Draggable(programElem, dragOpts);
-		programsList.forEach((name) => {
-			const programElem = $(`#program-${name}`);
-			if (programElem) new Draggable(programElem, dragOpts);
+		programsList.forEach((progName) => {
+			if (progName === name) return;
+			removeElem(`#program-${progName}`);
+			hasLoaded[progName] = false;
 		});
 
+		$(`#program-${name} .program-close`).addEventListener('click', () => closeProgram(name));
+
+		hasLoaded[name] = !hasLoaded[name];
 	}
-	hasLoaded[name] = !hasLoaded[name];
-	updateTaskbar();
 }
 
 function closeProgram(name) {
 	console.info(`> Closing os/desktop/${name}`);
-	const programElem = $(`#program-${name}`);
-	programElem?.parentElement.removeChild(programElem);
+	removeElem(`#program-${name}`);
 	hasLoaded[name] = false;
 	updateTaskbar();
 }
 
-programsList.forEach((name) => {
-	$(`#desktop-icon-${name}`).addEventListener('click', () => loadProgram(name));
-});
+(function init() {
+	$('#desktop').style.backgroundImage = `url('${window.root}/static/desktop-background.png')`;
+
+	programsList.forEach((name) => {
+		['desktop', 'taskbar'].forEach((part) => $(`#${part}-icon-${name}`).addEventListener('click', () => loadProgram(name)))
+	});
+})();

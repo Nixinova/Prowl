@@ -20,6 +20,7 @@ body {
 	place-items: center;
 }
 
+.clickable,
 .draggable>.topbar {
 	cursor: pointer;
 }
