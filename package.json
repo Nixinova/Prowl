@@ -11,10 +11,12 @@
 		"build": "npm run compile && cd dist && electron-packager ../",
 		"start": "npm run compile && electron ."
 	},
+	"dependencies": {
+		"draggable": "^4.2.0"
+	},
 	"devDependencies": {
 		"babel-cli": "^6.26.0",
 		"babel-preset-react": "^6.24.1",
-		"draggable": "^4.2.0",
 		"electron": "^13.1.7",
 		"electron-packager": "^15.3.0",
 		"glob": "^7.1.7",

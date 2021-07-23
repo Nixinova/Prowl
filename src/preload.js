@@ -8,13 +8,15 @@ window.addEventListener('DOMContentLoaded', () => {
 		for (const [key, val] of Object.entries(attributes)) {
 			elem.setAttribute(key, val);
 		}
-		elem.innerHTML='';
+		elem.innerHTML = '';
 		for (const item of content) {
-			if (typeof item ==='string') elem.innerHTML += item;
+			if (typeof item === 'string') elem.innerHTML += item;
 			else elem.innerHTML += item.outerHTML;
 		}
 		return elem;
 	};
+	window.onClick = (elem, func) => $(elem).addEventListener('click', func);
+	window.random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 	window.root = __dirname.replace(/\\/g, '/');
 	window.loadPage = require('./load');
 	window.loadPage('os/login');
